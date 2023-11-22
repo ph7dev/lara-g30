@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  web:
+    depends_on:
+      - db
+    image: webdevops/php-apache-dev:8.2-alpine
+    volumes:
+      - .:/var/www/html/
+      #add custom ssl cert:
+      #- ./dev/docker/customSSLCertificate/ssl.crt:/opt/docker/etc/httpd/ssl/server.crt
+      #- ./dev/docker/customSSLCertificate/ssl.csr:/opt/docker/etc/httpd/ssl/server.csr
+      #- ./dev/docker/customSSLCertificate/device.key:/opt/docker/etc/httpd/ssl/server.key
+      #reconfig apache if need:
+      #- ./dev/docker/httpd/vhost.conf:/opt/docker/etc/httpd/vhost.conf
+    working_dir: /var/www/html/
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    environment:
+      WEB_DOCUMENT_ROOT: "/var/www/html/public"
+  db:
+    image: mysql:5.7
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - ./dev/docker/mysql/5.7/data:/var/lib/mysql
+      - ./dev/docker/mysql/5.7/db_dumps:/var/tmp/db_dumps
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
