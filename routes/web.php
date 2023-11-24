@@ -29,4 +29,16 @@ Route::get('/home', 'App\Http\Controllers\HomeController@index');
 Route::get('/about', 'App\Http\Controllers\AboutController'); //invokable controller example
 
 
+Route::get('/hello/{name}', function () {
+    return 'Hello world!';
+})->where('name', '[A-Za-z]+');
+
+Route::get('/hello/{id?}', function (\Illuminate\Http\Request $request) {
+    return "Your ID is $request->id !";
+})->where('id', '[0-9]+');
+
+Route::get('/hello/{name}/{id?}', function (\Illuminate\Http\Request $request) {
+    return "Your ID is $request->id Name: $request->name!";
+})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+
 //Route::get('/test', 'App\Http\Controllers\TestController');
