@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,12 @@ Route::get('/hello', function () {
 Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
 Route::get('/about', 'App\Http\Controllers\AboutController'); //invokable controller example
+
+//Route::get('/posts', [PostController::class, 'index']);
+Route::controller(PostController::class)->group(function () {
+    Route::get('blog', 'index');
+    Route::get('blog/{id}', 'view');
+});
 
 
 Route::get('/hello/{name}', function () {
