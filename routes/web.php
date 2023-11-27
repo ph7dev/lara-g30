@@ -42,3 +42,10 @@ Route::get('/hello/{name}/{id?}', function (\Illuminate\Http\Request $request) {
 })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 
 //Route::get('/test', 'App\Http\Controllers\TestController');
+
+Route::get('/brands/{name?}', [\App\Http\Controllers\BrandsController::class, 'index']);
+Route::get('/products/{brand_id}', [\App\Http\Controllers\ProductsController::class, 'index'])
+    ->where(['brand_id', '[0-9]+']);
+
+Route::get('/products/details/{id}', [\App\Http\Controllers\ProductsController::class, 'details'])
+    ->where(['id' => '[0-9]+']);

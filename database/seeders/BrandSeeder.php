@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class BrandSeeder extends Seeder
 {
+    public const FIAT_ID = 1;
+    public const AF_ID = 2;
+    public const BMW_ID = 3;
+
     /**
      * Run the database seeds.
      */
@@ -14,21 +18,28 @@ class BrandSeeder extends Seeder
     {
         $brands = [
             [
+                'id' => self::FIAT_ID,
                 'name' => 'Fiat',
                 'country' => 'Italy',
-                'description' => 'Lorem ipsum'
+                'description' => 'Lorem ipsum',
+                'created_at' => fake()->dateTime,
+                'updated_at' => fake()->dateTime,
             ],
             [
+                'id' => self::AF_ID,
                 'name' => 'Alfa Romeo',
                 'country' => 'Italy',
-                'description' => 'Lorem ipsum'
+                'description' => 'Lorem ipsum',
+                'created_at' => fake()->dateTime,
+                'updated_at' => fake()->dateTime,
             ],
             [
+                'id' => self::BMW_ID,
                 'name' => 'Bmw',
                 'country' => 'Germany',
                 'description' => 'Lorem ipsum',
-                'created_at' => time(),
-                'updated_at' => time(),
+                'created_at' => fake()->dateTime,
+                'updated_at' => fake()->dateTime,
             ],
         ];
 
