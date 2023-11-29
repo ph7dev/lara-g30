@@ -56,3 +56,13 @@ Route::get('/products/{brand_id}', [\App\Http\Controllers\ProductsController::cl
 
 Route::get('/products/details/{id}', [\App\Http\Controllers\ProductsController::class, 'details'])
     ->where(['id' => '[0-9]+']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
