@@ -25,13 +25,13 @@ Route::get('/hello', function () {
 });
 
 //Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/home', 'App\Http\Controllers\HomeController@index');
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::get('/about', 'App\Http\Controllers\AboutController'); //invokable controller example
+Route::get('/about', 'App\Http\Controllers\AboutController')->name('about'); //invokable controller example
 
 //Route::get('/posts', [PostController::class, 'index']);
 Route::controller(PostController::class)->group(function () {
-    Route::get('blog', 'index');
+    Route::get('blog', 'index')->name('blog');
     Route::get('blog/{id}', 'view');
 });
 
@@ -66,3 +66,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+//Blog
+//Route::get('/blog', [BlogController]);
