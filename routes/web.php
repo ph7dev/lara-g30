@@ -25,13 +25,13 @@ Route::get('/hello', function () {
 });
 
 //Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/home', 'App\Http\Controllers\HomeController@index');
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::get('/about', 'App\Http\Controllers\AboutController'); //invokable controller example
+Route::get('/about', 'App\Http\Controllers\AboutController')->name('about'); //invokable controller example
 
 //Route::get('/posts', [PostController::class, 'index']);
 Route::controller(PostController::class)->group(function () {
-    Route::get('blog', 'index');
+    Route::get('blog', 'index')->name('blog');
     Route::get('blog/{id}', 'view');
 });
 
@@ -56,3 +56,17 @@ Route::get('/products/{brand_id}', [\App\Http\Controllers\ProductsController::cl
 
 Route::get('/products/details/{id}', [\App\Http\Controllers\ProductsController::class, 'details'])
     ->where(['id' => '[0-9]+']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+
+//Blog
+//Route::get('/blog', [BlogController]);
