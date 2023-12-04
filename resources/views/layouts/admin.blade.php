@@ -20,6 +20,7 @@
             @if (isset($header))
                 {{ $header }}
             @endif
+            <x-admin.alert></x-admin.alert>
             {{ $slot }}
         </main>
     </div>
