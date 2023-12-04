@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brand_id')->constrained();
+            /*$table->foreignId('brand_id')
+                ->constrained()
+                ->nullOnDelete()
+                ->cascadeOnDelete();*/
+            $table->bigInteger('brand_id')->unsigned()->nullable();
             $table->string('name');
             $table->enum('status', ['ENABLED', 'DISABLED']);
             $table->string('description');
