@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\{BrandController};
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,3 +71,12 @@ Route::middleware([
 
 //Blog
 //Route::get('/blog', [BlogController]);
+
+
+//Admin
+Route::prefix('admin')->group(function () {
+    Route::get('', \App\Http\Controllers\Admin\DashboardController::class)
+        ->name('admin');
+
+    Route::resource('brands', BrandController::class);
+});
