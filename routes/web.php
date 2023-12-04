@@ -78,5 +78,12 @@ Route::prefix('admin')->group(function () {
     Route::get('', \App\Http\Controllers\Admin\DashboardController::class)
         ->name('admin');
 
+    //TODO свої спец маршрути розміщувати перед ресурсними маршрутами щоб не було накладок маршрутів.
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('brands/trashed', [BrandController::class, 'trashed'])->name('brands.trashed');
+        Route::post('brands/restore/{id}', [BrandController::class, 'restore'])->name('brands.restore');
+        Route::delete('brands/force-destroy/{id}', [BrandController::class, 'forceDestroy'])->name('brands.forceDestroy');
+    });
+
     Route::resource('brands', BrandController::class);
 });
