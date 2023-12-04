@@ -22,6 +22,9 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //потрібно додати айді поточного запису що редагується до правила.
+            //Тоді фреймворк під капотом зробить запит у БД з виключенням цього айді, що
+            //дасть нам змогу уникнути Unique помилки.
             'name' => 'required|max:100|min:2|unique:brands,name,'.$this->brand->id,
             'country' => 'required',
             'description' => 'required',

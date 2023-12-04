@@ -42,7 +42,8 @@ class BrandController extends Controller
         $brand->country = $request->country;
         $brand->description = $request->description;
         $brand->save();
-        return redirect()->route('brands.index')
+        return redirect()
+            ->route('brands.index')
             ->with("success", "Brand created successfully!");
     }
 
@@ -67,14 +68,14 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        $t = 2;
         $brand->update([
             'name' => $request->name,
             'country' => $request->country,
             'description' => $request->description,
         ]);
 
-        return redirect()->route('brands.show', $brand->id)
+        return redirect()
+            ->route('brands.show', $brand->id)
             ->with("success", "Brand updated successfully!");
     }
 
@@ -84,7 +85,8 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         $brand->delete();
-        return redirect()->route('brands.index')
+        return redirect()
+            ->route('brands.index')
             ->with("success", "Brand [{$brand->name}] deleted successfully!");
     }
 
@@ -100,7 +102,8 @@ class BrandController extends Controller
             ->where('id', $id)
             ->restore();
 
-        return redirect()->route('brands.index')
+        return redirect()
+            ->route('brands.index')
             ->with("success", "Brand restored successfully!");
     }
 

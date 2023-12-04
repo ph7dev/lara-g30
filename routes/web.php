@@ -24,6 +24,16 @@ Route::get('/hello', function () {
     $date = date('Y-m-d');
     return view('hello', compact('date'));
 });
+Route::get('/hello/{name}', function () {
+    return 'Hello world!';
+})->where('name', '[A-Za-z]+');
+Route::get('/hello/{id?}', function (\Illuminate\Http\Request $request) {
+    return "Your ID is $request->id !";
+})->where('id', '[0-9]+');
+Route::get('/hello/{name}/{id?}', function (\Illuminate\Http\Request $request) {
+    return "Your ID is $request->id Name: $request->name!";
+})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+
 
 //Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
@@ -36,25 +46,9 @@ Route::controller(PostController::class)->group(function () {
     Route::get('blog/{id}', 'view');
 });
 
-
-Route::get('/hello/{name}', function () {
-    return 'Hello world!';
-})->where('name', '[A-Za-z]+');
-
-Route::get('/hello/{id?}', function (\Illuminate\Http\Request $request) {
-    return "Your ID is $request->id !";
-})->where('id', '[0-9]+');
-
-Route::get('/hello/{name}/{id?}', function (\Illuminate\Http\Request $request) {
-    return "Your ID is $request->id Name: $request->name!";
-})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
-
-//Route::get('/test', 'App\Http\Controllers\TestController');
-
 Route::get('/brands/{name?}', [\App\Http\Controllers\BrandsController::class, 'index']);
 Route::get('/products/{brand_id}', [\App\Http\Controllers\ProductsController::class, 'index'])
     ->where(['brand_id', '[0-9]+']);
-
 Route::get('/products/details/{id}', [\App\Http\Controllers\ProductsController::class, 'details'])
     ->where(['id' => '[0-9]+']);
 
@@ -69,10 +63,6 @@ Route::middleware([
 });
 
 
-//Blog
-//Route::get('/blog', [BlogController]);
-
-
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('', \App\Http\Controllers\Admin\DashboardController::class)
@@ -81,8 +71,10 @@ Route::prefix('admin')->group(function () {
     //TODO свої спец маршрути розміщувати перед ресурсними маршрутами щоб не було накладок маршрутів.
     Route::controller(BrandController::class)->group(function () {
         Route::get('brands/trashed', [BrandController::class, 'trashed'])->name('brands.trashed');
-        Route::post('brands/restore/{id}', [BrandController::class, 'restore'])->name('brands.restore');
-        Route::delete('brands/force-destroy/{id}', [BrandController::class, 'forceDestroy'])->name('brands.forceDestroy');
+        Route::post('brands/restore/{id}', [BrandController::class, 'restore'])->name('brands.restore')
+            ->where('id', '[0-9]+');
+        Route::delete('brands/force-destroy/{id}', [BrandController::class, 'forceDestroy'])->name('brands.forceDestroy')
+            ->where('id', '[0-9]+');
     });
 
     Route::resource('brands', BrandController::class);
