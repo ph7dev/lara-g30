@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\{BrandController};
+
+use App\Http\Controllers\Admin\{BrandController, DashboardController};
 use App\Http\Controllers\PostController;
+use App\Livewire\Admin\Categories\{CategoryList};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,10 +65,10 @@ Route::middleware([
 });
 
 
-//Admin
+//Admin panel
+
 Route::prefix('admin')->group(function () {
-    Route::get('', \App\Http\Controllers\Admin\DashboardController::class)
-        ->name('admin');
+    Route::get('', DashboardController::class)->name('admin');
 
     //TODO свої спец маршрути розміщувати перед ресурсними маршрутами щоб не було накладок маршрутів.
     Route::controller(BrandController::class)->group(function () {
@@ -76,6 +78,8 @@ Route::prefix('admin')->group(function () {
         Route::delete('brands/force-destroy/{id}', [BrandController::class, 'forceDestroy'])->name('brands.forceDestroy')
             ->where('id', '[0-9]+');
     });
+
+    Route::get('categories', CategoryList::class)->name('categories');
 
     Route::resource('brands', BrandController::class);
 });
