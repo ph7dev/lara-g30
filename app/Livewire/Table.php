@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 abstract class Table extends Component
 {
-    use WithPagination;
+    use WithPagination; //spa pagination for Livewire pages
 
     public int $perPage = 10;
     public int $page = 1;
