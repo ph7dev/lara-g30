@@ -7,6 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
     <style> @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"); </style>
+
+    <style> [x-cloak] { display: none; } </style>
+    {{--<tallstackui:script />
+    <tallstackui:style />--}}
+    <tallstackui:script />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>

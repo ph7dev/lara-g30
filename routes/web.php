@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\{BrandController};
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,10 +62,12 @@ Route::middleware([
 });
 
 
-//Admin
+//Admin panel
+use App\Http\Controllers\Admin\{BrandController, DashboardController};
+use App\Livewire\Admin\Categories\{CategoryList};
+use App\Livewire\Admin\Tags\{TagList};
 Route::prefix('admin')->group(function () {
-    Route::get('', \App\Http\Controllers\Admin\DashboardController::class)
-        ->name('admin');
+    Route::get('', DashboardController::class)->name('admin');
 
     //TODO свої спец маршрути розміщувати перед ресурсними маршрутами щоб не було накладок маршрутів.
     Route::controller(BrandController::class)->group(function () {
@@ -77,5 +78,7 @@ Route::prefix('admin')->group(function () {
             ->where('id', '[0-9]+');
     });
 
+    Route::get('categories', CategoryList::class)->name('categories');
+    Route::get('tags', TagList::class)->name('tags');
     Route::resource('brands', BrandController::class);
 });
