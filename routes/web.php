@@ -64,7 +64,7 @@ Route::middleware([
 
 //Admin panel
 use App\Http\Controllers\Admin\{BrandController, DashboardController};
-use App\Livewire\Admin\Categories\{CategoryList};
+use App\Livewire\Admin\Categories\{CategoryList, CategoryCreate, CategoryEdit};
 use App\Livewire\Admin\Tags\{TagList};
 Route::prefix('admin')->group(function () {
     Route::get('', DashboardController::class)->name('admin');
@@ -79,6 +79,8 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::get('categories', CategoryList::class)->name('categories');
+    Route::get('categories/create', CategoryCreate::class)->name('categories.create');
+    Route::get('categories/{category}/edit', CategoryEdit::class)->name('categories.edit');
     Route::get('tags', TagList::class)->name('tags');
     Route::resource('brands', BrandController::class);
 });

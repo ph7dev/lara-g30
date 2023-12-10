@@ -7,7 +7,7 @@
             <div class="flex">
 
                 {{--Приклад використання кнопок TallstackUI--}}
-                <x-button href="#">Create New category</x-button>
+                <x-button href=" {{ route('categories.create') }} ">New category</x-button>
                 <x-button href="#" color="orange">Trashed brands</x-button>
 
                 <x-toggle />

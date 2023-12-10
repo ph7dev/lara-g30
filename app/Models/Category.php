@@ -13,7 +13,7 @@ class Category extends Model
         Sluggable,
         SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'slug', 'status'];
+    protected $fillable = ['name', 'description', 'slug', 'status', 'cover'];
 
     public function sluggable(): array
     {
