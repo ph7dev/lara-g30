@@ -9,8 +9,9 @@
     <style> @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"); </style>
 
     <style> [x-cloak] { display: none; } </style>
+    {{--<tallstackui:script />
+    <tallstackui:style />--}}
     <tallstackui:script />
-    <tallstackui:style />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
