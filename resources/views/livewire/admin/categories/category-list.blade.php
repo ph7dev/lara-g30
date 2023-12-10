@@ -10,6 +10,8 @@
                 <x-button href="#">Create New category</x-button>
                 <x-button href="#" color="orange">Trashed brands</x-button>
 
+                <x-toggle />
+
             </div>
         </div>
     </x-slot>

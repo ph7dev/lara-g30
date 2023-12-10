@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Categories;
 
 use Livewire\Component;
+use Livewire\Attributes\{Layout, Title};
 
 #[Title('Categories list')]
 class CategoryList extends Component

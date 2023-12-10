@@ -9,6 +9,7 @@ export default {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './vendor/tallstackui/tallstackui/src/**/*.php',
     ],
 
     theme: {
@@ -20,4 +21,8 @@ export default {
     },
 
     plugins: [forms, typography],
+
+    presets: [
+        require('./vendor/tallstackui/tallstackui/tailwind.config.js')
+    ],
 };
