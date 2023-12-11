@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,8 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Brand::factory(30)->create();
         Category::factory(40)->create();
-        Tag::factory(10)->create();
+        Tag::factory(100)->create();
+        Product::factory(100)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -30,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             //BrandSeeder::class,
-            ProductSeeder::class
+            //ProductSeeder::class
         ]);
     }
 }

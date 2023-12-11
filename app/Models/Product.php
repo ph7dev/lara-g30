@@ -17,6 +17,8 @@ class Product extends Model
 
     public function sluggable(): array
     {
+
+
         return [
             'slug' => ['source' => 'name']
         ];
