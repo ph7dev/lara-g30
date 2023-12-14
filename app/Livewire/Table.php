@@ -17,6 +17,10 @@ abstract class Table extends Component
 
     public abstract function columns(): array;
 
+    public abstract function deleteItem(int $id);
+
+    public abstract function editRoute(int $id): string;
+
     public function data()
     {
         return $this->query()->paginate($this->perPage);
