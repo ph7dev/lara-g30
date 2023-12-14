@@ -51,20 +51,11 @@ Route::get('/products/{brand_id}', [\App\Http\Controllers\ProductsController::cl
 Route::get('/products/details/{id}', [\App\Http\Controllers\ProductsController::class, 'details'])
     ->where(['id' => '[0-9]+']);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
-
 
 //Admin panel
 use App\Http\Controllers\Admin\{BrandController, DashboardController};
 use App\Livewire\Admin\Categories\{CategoryList, CategoryCreate, CategoryEdit};
+use App\Livewire\Admin\Products\{ListProduct, CreateProduct, UpdateProduct, ShowProduct};
 use App\Livewire\Admin\Tags\{TagList};
 Route::prefix('admin')->group(function () {
     Route::get('', DashboardController::class)->name('admin');
@@ -81,6 +72,22 @@ Route::prefix('admin')->group(function () {
     Route::get('categories', CategoryList::class)->name('categories');
     Route::get('categories/create', CategoryCreate::class)->name('categories.create');
     Route::get('categories/{category}/edit', CategoryEdit::class)->name('categories.edit');
+
     Route::get('tags', TagList::class)->name('tags');
     Route::resource('brands', BrandController::class);
+
+    Route::get('products', ListProduct::class)->name('products');
+    Route::get('products/create', CreateProduct::class)->name('products.create');
+    Route::get('products/{product}/update', UpdateProduct::class)->name('products.update');
+});
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
