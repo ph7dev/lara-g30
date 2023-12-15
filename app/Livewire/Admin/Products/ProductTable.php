@@ -9,9 +9,22 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductTable extends Table
 {
+    public string $searchQuery = '';
+
     public function query(): Builder
     {
-        return Product::withoutTrashed();  //->where('status', '=', 0);
+        return Product::query()
+            ->when(
+                $this->searchQuery !== '',
+                fn(Builder $query) => $query->where('name', 'like', "%{$this->searchQuery}%")
+            );
+    }
+
+    public function updated($key):void
+    {
+        if ($key === 'searchQuery') {
+            $this->resetPage();
+        }
     }
 
     public function columns(): array

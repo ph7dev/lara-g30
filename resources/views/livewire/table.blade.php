@@ -1,5 +1,18 @@
 <div class="flex flex-col gap-5">
     <div class="relative overflow-x-auto shadow-md rounded-lg">
+
+        {{--Search--}}
+        <div class="flex text-sm text-left text-gray-500">
+            <div class="flex-1 text-sm text-left text-gray-500">
+                <input wire:model.live="searchQuery" type="search" id="search" placeholder="Search..."
+                       class="mt-1 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset transition
+duration-150 ease-in-out focus:ring-2 sm:text-sm sm:leading-6 focus:ring-primary-600
+dark:bg-dark-800 dark:placeholder-dark-500 dark:text-dark-300 dark:border-dark-900
+dark:ring-dark-600 dark:focus:ring-primary-600 text-gray-700 ring-gray-300">
+            </div>
+        </div>
+
+        {{--Table view--}}
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
@@ -43,7 +56,7 @@
                     @endforeach
                     <td>
                         <div class="flex">
-                            <x-button href="{{ $this->editRoute($row->id) }}" color="blue">Edit</x-button>
+                            <x-button class="mr-2" href="{{ $this->editRoute($row->id) }}" color="blue">Edit</x-button>
                             <x-button wire:click="deleteItem({{ $row->id }})" color="red">Delete</x-button>
                         </div>
                     </td>
